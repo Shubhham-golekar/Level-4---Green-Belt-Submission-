@@ -1,0 +1,38 @@
+name: Soroban dApp CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  contract-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Rust Stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - name: Install Soroban CLI
+        run: cargo install --locked soroban-cli
+      - name: Run Contract Tests
+        working-directory: ./contracts
+        run: |
+          cargo test
+
+  frontend-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: Install Dependencies
+        working-directory: ./frontend
+        run: npm ci || npm install
+      - name: Build Frontend
+        working-directory: ./frontend
+        run: npm run build
