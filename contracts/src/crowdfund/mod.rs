@@ -8,7 +8,7 @@ pub enum DataKey {
     TargetAmount,
     TotalAmount,
     Balance(Address),
-    pub State,
+    State,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
@@ -21,9 +21,8 @@ pub enum State {
 
 // Interface to the token contract.
 pub mod token {
-    soroban_sdk::contractimport!(
-        file = "../target/wasm32-unknown-unknown/release/contracts.wasm"
-    );
+    use soroban_sdk::{Address, Env};
+    pub use crate::token::contract::{TokenClient as Client};
 }
 
 #[contract]

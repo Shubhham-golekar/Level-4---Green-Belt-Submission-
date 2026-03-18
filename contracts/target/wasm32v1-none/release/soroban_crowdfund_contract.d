@@ -1,0 +1,1 @@
+C:\Users\SHUBHAM\OneDrive\Desktop\level4\contracts\target\wasm32v1-none\release\soroban_crowdfund_contract.wasm: C:\Users\SHUBHAM\OneDrive\Desktop\level4\contracts\crowdfund\src\crowdfund.rs C:\Users\SHUBHAM\OneDrive\Desktop\level4\contracts\crowdfund\src\lib.rs
