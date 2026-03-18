@@ -1,8 +1,8 @@
 # SoroFund: Decentralized Soroban Crowdfunding
 
-![Mobile Responsive View](/C:/Users/SHUBHAM/.gemini/antigravity/brain/b5498a8e-bc74-404b-9c9f-4f33fd1cc8f0/mobile_responsive_view_1773768011792.png)
 
-[![Soroban dApp CI/CD](https://github.com/shubham-level4/level4/actions/workflows/ci.yml/badge.svg)](https://github.com/shubham-level4/level4/actions)
+
+[![Soroban dApp CI/CD](https://github.com/Shubhham-golekar/Level-4---Green-Belt-Submission-/actions/workflows/ci.yml/badge.svg)](https://github.com/Shubhham-golekar/Level-4---Green-Belt-Submission-/actions)
 
 SoroFund is a production-ready decentralized crowdfunding platform built on Stellar's Soroban platform. It features custom token creation and an inter-contract crowdfund logic.
 
