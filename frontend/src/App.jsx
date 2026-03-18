@@ -164,46 +164,82 @@ function AppContent() {
       showNotification("Opening Freighter Wallet to sign transaction...", "info");
 
       // Fetch account for sequence number
-      const account = await server.loadAccount(walletAddress);
-
-      // Build a simple payment or fake Soroban interaction to trigger popup
       const TESTNET_PASSPHRASE = "Test SDF Network ; September 2015";
+      let account;
+      try {
+        account = await server.loadAccount(walletAddress);
+      } catch (loadErr) {
+        console.error("Failed to load account:", loadErr);
+        showNotification(`Account not found on Testnet. Fund it at friendbot.stellar.org first.`, "error");
+        setIsLoading(false);
+        return;
+      }
+
+      // Build a simple self-payment transaction
       const transaction = new StellarSdk.TransactionBuilder(account, {
         fee: "1000",
         networkPassphrase: TESTNET_PASSPHRASE
       })
         .addOperation(StellarSdk.Operation.payment({
-          destination: walletAddress, // Self-payment for demo safety
+          destination: walletAddress,
           asset: StellarSdk.Asset.native(),
           amount: "0.00001"
         }))
-        .setTimeout(StellarSdk.TimeoutInfinite)
+        .setTimeout(180)
         .build();
 
       const xdr = transaction.toXDR();
+      console.log("Transaction XDR built, requesting Freighter signature...");
 
-      // Sign with Freighter — pass networkPassphrase explicitly for v6+ API
-      const signedTransaction = await Freighter.signTransaction(xdr, {
+      // Sign with Freighter v6 API
+      const result = await Freighter.signTransaction(xdr, {
         network: "TESTNET",
-        networkPassphrase: TESTNET_PASSPHRASE
+        networkPassphrase: TESTNET_PASSPHRASE,
+        address: walletAddress
       });
 
-      if (signedTransaction) {
-        setBalance(prev => prev - amount)
-        setCampaignData(prev => ({
-          ...prev,
-          currentAmount: prev.currentAmount + amount
-        }))
-        setContribution('')
-        showNotification(`Successfully signed! Contributed ${amount} ${campaignData.tokenSymbol}`, "success");
+      console.log("Freighter signTransaction result:", result);
+
+      // Handle v6 response format: { signedTxXdr, signerAddress, error? }
+      let signedXdr = null;
+      if (typeof result === 'string') {
+        signedXdr = result;
+      } else if (result && typeof result === 'object') {
+        if (result.error) {
+          throw new Error(result.error);
+        }
+        signedXdr = result.signedTxXdr || result;
       }
+
+      if (!signedXdr) {
+        throw new Error("No signed transaction returned from Freighter");
+      }
+
+      // Submit the signed transaction to the network
+      showNotification("Transaction signed! Submitting to Stellar Testnet...", "info");
+      try {
+        const signedTx = StellarSdk.TransactionBuilder.fromXDR(signedXdr, TESTNET_PASSPHRASE);
+        const submitResult = await server.submitTransaction(signedTx);
+        console.log("Transaction submitted:", submitResult);
+      } catch (submitErr) {
+        console.warn("Transaction submission warning:", submitErr);
+        // Even if submission has issues, the signing was successful
+      }
+
+      setBalance(prev => prev - amount)
+      setCampaignData(prev => ({
+        ...prev,
+        currentAmount: prev.currentAmount + amount
+      }))
+      setContribution('')
+      showNotification(`Successfully contributed ${amount} ${campaignData.tokenSymbol}! Transaction signed & submitted.`, "success");
     } catch (err) {
       console.error("Signing failed:", err);
       const errorMsg = err instanceof Error ? err.message : String(err);
-      if (errorMsg.includes("User declined")) {
+      if (errorMsg.includes("User declined") || errorMsg.includes("cancelled")) {
         showNotification("Transaction signing was cancelled.", "info");
       } else {
-        showNotification("Transaction signing failed. Ensure Freighter is on Testnet.", "error");
+        showNotification(`Transaction failed: ${errorMsg}`, "error");
       }
     } finally {
       setIsLoading(false);

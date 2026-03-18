@@ -1,6 +1,6 @@
 # SoroFund: Decentralized Soroban Crowdfunding
 
-
+![SoroFund Dashboard](./screenshots/dashboard.png)
 
 [![Soroban dApp CI/CD](https://github.com/Shubhham-golekar/Level-4---Green-Belt-Submission-/actions/workflows/ci.yml/badge.svg)](https://github.com/Shubhham-golekar/Level-4---Green-Belt-Submission-/actions)
 
@@ -10,7 +10,7 @@ SoroFund is a production-ready decentralized crowdfunding platform built on Stel
 **Project URL:** [https://dist-delta-six-38.vercel.app](https://dist-delta-six-38.vercel.app)
 
 ## 📱 Mobile Responsiveness
-Our UI is fully optimized for all screen sizes. See the screenshot above for a view of the campaign dashboard on a mobile viewport.
+Our UI is fully optimized for all screen sizes, from desktop to mobile viewports.
 
 ## 🛠 CI/CD Pipeline
 We use GitHub Actions to automate our testing and build process:
