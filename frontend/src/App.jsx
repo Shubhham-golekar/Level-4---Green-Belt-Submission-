@@ -167,10 +167,10 @@ function AppContent() {
       const account = await server.loadAccount(walletAddress);
 
       // Build a simple payment or fake Soroban interaction to trigger popup
-      // Use explicit networkPassphrase option and literal string to avoid any SDK defaults
+      const TESTNET_PASSPHRASE = "Test SDF Network ; September 2015";
       const transaction = new StellarSdk.TransactionBuilder(account, {
         fee: "1000",
-        networkPassphrase: "Test SDF Network ; September 2015"
+        networkPassphrase: TESTNET_PASSPHRASE
       })
         .addOperation(StellarSdk.Operation.payment({
           destination: walletAddress, // Self-payment for demo safety
@@ -182,9 +182,10 @@ function AppContent() {
 
       const xdr = transaction.toXDR();
 
-      // Sign with Freighter
+      // Sign with Freighter — pass networkPassphrase explicitly for v6+ API
       const signedTransaction = await Freighter.signTransaction(xdr, {
-        network: "TESTNET"
+        network: "TESTNET",
+        networkPassphrase: TESTNET_PASSPHRASE
       });
 
       if (signedTransaction) {
