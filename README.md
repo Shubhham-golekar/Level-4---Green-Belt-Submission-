@@ -1,7 +1,6 @@
 # SoroFund: Decentralized Soroban Crowdfunding
 
-![SoroFund Dashboard](<img width="1892" height="899" alt="Screenshot 2026-03-19 133307" src="https://github.com/user-attachments/assets/4c031848-6028-458b-a60a-23266988ca1f" />
-)
+
 
 [![Soroban dApp CI/CD](https://github.com/Shubhham-golekar/Level-4---Green-Belt-Submission-/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Shubhham-golekar/Level-4---Green-Belt-Submission-/actions)
 
@@ -14,12 +13,14 @@ SoroFund is a production-ready decentralized crowdfunding platform built on Stel
 **[Video Demo](https://www.loom.com/share/c7f1b03e15a34343a1ef0960f72bf89d)
 
 ## 📱 Mobile Responsiveness
+![WhatsApp Image 2026-03-19 at 3 46 48 PM](https://github.com/user-attachments/assets/592c2751-c76c-48e2-9a0c-5b900532a7a5)
+
 Our UI is fully optimized for all screen sizes, from desktop to mobile viewports.
 
 ## 🛠 CI/CD Pipeline
 We use GitHub Actions to automate our testing and build process:
-- **Contract Tests**: Ensures all Soroban smart contracts pass functional verification.
-- **Frontend Build**: Validates the React + Vite + Tailwind CSS build before deployment.
+<img width="1888" height="515" alt="Screenshot 2026-03-19 153403" src="https://github.com/user-attachments/assets/eaf55762-fbed-4714-87d0-8f3493ad93ab" />
+
 
 ## 📜 Contract Details (Testnet)
 | Contract | Address |
