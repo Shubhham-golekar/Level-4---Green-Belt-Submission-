@@ -1,6 +1,5 @@
 [workspace]
 members = [
-    "token",
     "crowdfund",
 ]
 resolver = "2"
