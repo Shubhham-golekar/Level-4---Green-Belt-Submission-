@@ -10,6 +10,9 @@ SoroFund is a production-ready decentralized crowdfunding platform built on Stel
 ## 🚀 Live Demo
 **Project URL:** [https://dist-delta-six-38.vercel.app](https://dist-delta-six-38.vercel.app)
 
+## Demo Video
+**[Video Demo](https://www.loom.com/share/c7f1b03e15a34343a1ef0960f72bf89d)
+
 ## 📱 Mobile Responsiveness
 Our UI is fully optimized for all screen sizes, from desktop to mobile viewports.
 
