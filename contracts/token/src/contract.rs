@@ -1,4 +1,3 @@
-#![no_std]
 use soroban_sdk::{contract, contractimpl, contracttype, Address, Env, String};
 use crate::admin::{has_admin, read_admin, write_admin};
 use crate::allowance::{read_allowance, spend_allowance, write_allowance};
