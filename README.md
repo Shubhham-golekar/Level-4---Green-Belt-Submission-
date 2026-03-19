@@ -1,6 +1,7 @@
 # SoroFund: Decentralized Soroban Crowdfunding
 
-![SoroFund Dashboard](./screenshots/dashboard.png)
+![SoroFund Dashboard](<img width="1892" height="899" alt="Screenshot 2026-03-19 133307" src="https://github.com/user-attachments/assets/4c031848-6028-458b-a60a-23266988ca1f" />
+)
 
 [![Soroban dApp CI/CD](https://github.com/Shubhham-golekar/Level-4---Green-Belt-Submission-/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Shubhham-golekar/Level-4---Green-Belt-Submission-/actions)
 
