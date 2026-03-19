@@ -15,11 +15,16 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-unknown-unknown
-      - name: Fresh Dependency Resolution
-        working-directory: ./contracts
-        run: |
-          rm -f Cargo.lock
-          cargo update
+      - name: Cache Cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            contracts/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('contracts/Cargo.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
       - name: Run Contract Tests
         working-directory: ./contracts
         run: cargo test --verbose
